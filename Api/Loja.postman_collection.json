@@ -1,0 +1,372 @@
+{
+  "info": {
+    "name": "Loja - Produtos, Carrinho e Venda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "carrinhoId",
+      "value": "1"
+    },
+    {
+      "key": "itemId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Produto",
+      "item": [
+        {
+          "name": "Criar produto (com imagem)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/produto/create",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "produto",
+                "create"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nome",
+                  "value": "Teclado",
+                  "type": "text"
+                },
+                {
+                  "key": "preco",
+                  "value": "99.90",
+                  "type": "text"
+                },
+                {
+                  "key": "imagem",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar produtos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/produto/getAll",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "produto",
+                "getAll"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar produto por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/produto/getByID/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "produto",
+                "getByID",
+                "{{id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar produto",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/produto/update/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "produto",
+                "update",
+                "{{id}}"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nome",
+                  "value": "Teclado mecânico",
+                  "type": "text"
+                },
+                {
+                  "key": "preco",
+                  "value": "149.90",
+                  "type": "text"
+                },
+                {
+                  "key": "imagem",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deletar produto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/produto/delete/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "produto",
+                "delete",
+                "{{id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carrinho",
+      "item": [
+        {
+          "name": "Criar carrinho",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/create",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "create"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar carrinho",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/getByID/{{carrinhoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "getByID",
+                "{{carrinhoId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Adicionar item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/addItem/{{carrinhoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "addItem",
+                "{{carrinhoId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"produtoId\": 1,\n  \"quantidade\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Alterar quantidade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/updateItem/{{carrinhoId}}/{{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "updateItem",
+                "{{carrinhoId}}",
+                "{{itemId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantidade\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Remover item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/removeItem/{{carrinhoId}}/{{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "removeItem",
+                "{{carrinhoId}}",
+                "{{itemId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Esvaziar carrinho",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/carrinho/clear/{{carrinhoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carrinho",
+                "clear",
+                "{{carrinhoId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Venda",
+      "item": [
+        {
+          "name": "Finalizar venda",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/venda/create",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "venda",
+                "create"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrinhoId\": 1,\n  \"formaPagamento\": \"pix\",\n  \"cliente\": \"Maria\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Listar vendas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/venda/getAll",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "venda",
+                "getAll"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar venda por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/venda/getByID/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "venda",
+                "getByID",
+                "{{id}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
